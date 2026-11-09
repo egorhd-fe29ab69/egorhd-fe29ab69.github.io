@@ -1,0 +1,2014 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51每日大赛 - 每日赛程追踪与对战分析</title>
+  <meta name="description" content="51每日大赛每日分享最新赛程、对阵表与战报，覆盖王者荣耀、英雄联盟、CS2、街霸6等热门项目，适合关注每日电竞赛事与选手动态的玩家浏览。">
+  <meta name="keywords" content="每日电竞赛程, 对战表, 赛事战报, 选手数据, 观赛指南">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1e2b'/%3E%3Ctext x='50' y='68' font-size='50' font-family='sans-serif' font-weight='bold' fill='%23f5b342' text-anchor='middle'%3E51%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f4f5f8;
+      --panel: #ffffff;
+      --ink: #1a1e2b;
+      --ink-soft: #4b5162;
+      --muted: #7a8194;
+      --line: #e2e5ec;
+      --brand: #1a1e2b;
+      --accent: #f5b342;
+      --accent-soft: #fdf3e0;
+      --accent-hover: #e6a22e;
+      --blue: #2d6cdf;
+      --red: #e5484d;
+      --green: #2e9e5b;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --header-h: 112px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul, ol { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ---------- 吸顶公告条 + 页头 ---------- */
+    .sticky-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .announce-bar {
+      background: var(--brand);
+      color: #fff;
+      font-size: 13px;
+      padding: 7px 0;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .announce-bar strong { color: var(--accent); font-weight: 600; }
+    .announce-bar .dot { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin: 0 8px; vertical-align: middle; }
+
+    .site-header {
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+    .header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.03em;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+    .brand-name {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .header-nav {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .header-nav::-webkit-scrollbar { display: none; }
+    .header-nav a {
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .header-nav a:hover { background: var(--bg); color: var(--ink); }
+    .header-nav a.active { color: var(--ink); background: var(--accent-soft); font-weight: 600; }
+    .header-quick {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 0 14px;
+      height: 36px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(245,179,66,0.18);
+    }
+    .search-box input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 13px;
+      width: 140px;
+      color: var(--ink);
+      font-family: inherit;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .btn-quick {
+      background: var(--accent);
+      color: var(--ink);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .btn-quick:hover { background: var(--accent-hover); }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      background: linear-gradient(135deg, #12151f 0%, #1e2433 55%, #2a3040 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -60px; right: -40px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,179,66,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -120px; left: 10%;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,108,223,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 48px 24px 52px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,179,66,0.14);
+      color: var(--accent);
+      border: 1px solid rgba(245,179,66,0.28);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+    }
+    .hero-tag .pulse {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      margin-bottom: 26px;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--ink);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 26px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: var(--radius-sm);
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.06); }
+
+    /* 首屏右侧 SVG 赛程视觉 */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-visual svg {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+    }
+
+    /* ---------- 三栏门户布局 ---------- */
+    .portal {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      display: grid;
+      grid-template-columns: 176px minmax(0, 1fr) 248px;
+      gap: 24px;
+      align-items: start;
+    }
+    .col-left, .col-right {
+      position: sticky;
+      top: calc(var(--header-h) + 16px);
+      align-self: start;
+    }
+
+    /* 左栏频道索引 */
+    .side-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 0;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+    }
+    .side-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0 16px 10px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8px;
+    }
+    .channel-list { display: flex; flex-direction: column; }
+    .channel-list a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      transition: background 0.12s, color 0.12s;
+      border-left: 3px solid transparent;
+    }
+    .channel-list a:hover { background: var(--bg); color: var(--ink); }
+    .channel-list a.active {
+      color: var(--ink);
+      font-weight: 600;
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+    }
+    .channel-list .ch-dot {
+      width: 7px; height: 7px;
+      border-radius: 2px;
+      background: var(--muted);
+      flex-shrink: 0;
+    }
+    .channel-list a.active .ch-dot { background: var(--accent); }
+
+    /* 右栏 */
+    .hot-list { display: flex; flex-direction: column; }
+    .hot-item {
+      display: flex;
+      gap: 10px;
+      padding: 9px 16px;
+      align-items: flex-start;
+      transition: background 0.12s;
+      border-radius: 0;
+    }
+    .hot-item:hover { background: var(--bg); }
+    .hot-rank {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      width: 18px;
+      flex-shrink: 0;
+      text-align: center;
+      line-height: 1.5;
+      font-variant-numeric: tabular-nums;
+    }
+    .hot-item:nth-child(-n+3) .hot-rank { color: var(--red); }
+    .hot-info { min-width: 0; }
+    .hot-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 2px;
+    }
+    .hot-meta {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .hot-meta .up { color: var(--green); }
+
+    .update-feed { display: flex; flex-direction: column; }
+    .update-item {
+      padding: 9px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-item .u-time {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .update-item .u-text {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .update-item .u-text strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- 主内容区 ---------- */
+    .main-col { min-width: 0; }
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 26px;
+      margin-bottom: 22px;
+      scroll-margin-top: calc(var(--header-h) + 16px);
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      border-radius: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .section-more {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .section-more:hover { color: var(--ink); }
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: -8px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    /* 概览正文 */
+    .overview-text p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+    .overview-text p:last-child { margin-bottom: 0; }
+    .overview-text strong { color: var(--ink); font-weight: 600; }
+
+    /* 精选卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .match-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--panel);
+      transition: box-shadow 0.18s, transform 0.18s;
+      display: flex;
+      flex-direction: column;
+    }
+    .match-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .match-card .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--bg);
+    }
+    .match-card .card-body {
+      padding: 12px 14px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .tag-type { background: var(--brand); color: #fff; }
+    .tag-hot { background: #fdecec; color: var(--red); }
+    .tag-blue { background: #e8f0fe; color: var(--blue); }
+    .tag-green { background: #e6f5ec; color: var(--green); }
+    .tag-soft { background: var(--bg); color: var(--muted); }
+    .card-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 10px;
+    }
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 9px;
+    }
+    .card-foot .heat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--red);
+      font-weight: 600;
+    }
+    .card-foot .score {
+      color: var(--accent);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 最新动态列表 */
+    .update-list { display: flex; flex-direction: column; }
+    .update-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .update-row:last-child { border-bottom: none; }
+    .update-row .u-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-top: 1px;
+      min-width: 62px;
+      text-align: center;
+    }
+    .u-badge.live { background: #fdecec; color: var(--red); }
+    .u-badge.done { background: #eef0f4; color: var(--muted); }
+    .u-badge.new { background: #e6f5ec; color: var(--green); }
+    .u-badge.sched { background: #e8f0fe; color: var(--blue); }
+    .update-row .u-content { flex: 1; min-width: 0; }
+    .update-row .u-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.45;
+      margin-bottom: 2px;
+    }
+    .update-row .u-summary {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .update-row .u-time-right {
+      flex-shrink: 0;
+      font-size: 11.5px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    /* 分类入口 */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .cat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--panel);
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .cat-item:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 2px 8px rgba(245,179,66,0.15);
+    }
+    .cat-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .cat-count {
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .cat-item .cat-dot {
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      margin-bottom: 2px;
+    }
+
+    /* 深度解析 */
+    .deep-article h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 22px 0 10px;
+      line-height: 1.4;
+    }
+    .deep-article h3:first-child { margin-top: 0; }
+    .deep-article p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 10px;
+    }
+    .deep-article ul {
+      margin: 8px 0 14px;
+      padding-left: 0;
+    }
+    .deep-article ul li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-bottom: 6px;
+    }
+    .deep-article ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .deep-article strong { color: var(--ink); font-weight: 600; }
+
+    /* 体验指南步骤 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .guide-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent);
+    }
+    .guide-step .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .guide-step .step-body { flex: 1; min-width: 0; }
+    .guide-step .step-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .guide-step .step-text {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    details.faq-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--panel);
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+    details.faq-item[open] { border-color: var(--accent); }
+    details.faq-item summary {
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    details.faq-item[open] summary::after {
+      content: "−";
+      color: var(--accent);
+    }
+    details.faq-item summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .faq-answer {
+      padding: 0 16px 14px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+    .faq-answer strong { color: var(--ink); }
+
+    /* 用户评论 */
+    .comment-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .comment-card {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--panel);
+    }
+    .comment-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+    }
+    .c-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .c-time {
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+    .c-text {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .c-text .c-tag {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--blue);
+      background: #e8f0fe;
+      padding: 0 5px;
+      border-radius: 3px;
+      margin-right: 3px;
+      font-weight: 600;
+    }
+
+    /* 相关资讯 */
+    .news-list { display: flex; flex-direction: column; gap: 14px; }
+    .news-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .news-thumb {
+      width: 100px;
+      height: 66px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .news-body { flex: 1; min-width: 0; }
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.45;
+      margin-bottom: 3px;
+    }
+    .news-title:hover { color: var(--blue); }
+    .news-summary {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 4px;
+    }
+    .news-date {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 相关推荐标签 */
+    .rec-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .rec-tag {
+      font-size: 13px;
+      padding: 7px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink-soft);
+      font-weight: 500;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .rec-tag:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--ink);
+    }
+
+    /* 补充：热门榜单 + 时间线 */
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .rank-table { width: 100%; border-collapse: collapse; }
+    .rank-table th {
+      text-align: left;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0 0 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .rank-table th:last-child { text-align: right; }
+    .rank-table td {
+      padding: 9px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    .rank-table tr:last-child td { border-bottom: none; }
+    .rank-table .rk {
+      font-weight: 800;
+      color: var(--muted);
+      font-size: 12px;
+      width: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+    .rank-table tr:nth-child(-n+3) .rk { color: var(--red); }
+    .rank-table .rk-name { font-weight: 600; color: var(--ink); }
+    .rank-table .rk-val { text-align: right; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+
+    .timeline { display: flex; flex-direction: column; position: relative; padding-left: 18px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--line);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 14px 0;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -17px;
+      top: 5px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--panel);
+      border: 2px solid var(--muted);
+    }
+    .tl-item.hot::before { border-color: var(--accent); background: var(--accent); }
+    .tl-time {
+      font-size: 11px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 1px;
+    }
+    .tl-text {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .tl-text strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- 页尾 ---------- */
+    .site-footer {
+      background: var(--brand);
+      color: rgba(255,255,255,0.7);
+      margin-top: 20px;
+    }
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 40px 24px 24px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .footer-brand .brand-mark {
+      background: rgba(255,255,255,0.1);
+      color: var(--accent);
+    }
+    .footer-brand .brand-name { color: #fff; font-size: 17px; }
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      max-width: 320px;
+    }
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ---------- 无结果提示 ---------- */
+    .no-result {
+      display: none;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      margin-top: 12px;
+    }
+    .no-result.show { display: block; }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1200px) {
+      .portal {
+        grid-template-columns: 160px minmax(0, 1fr) 220px;
+        gap: 18px;
+        padding: 0 18px 32px;
+      }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-grid { grid-template-columns: repeat(4, 1fr); }
+      .comment-list { grid-template-columns: 1fr 1fr; }
+      .bonus-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 36px 20px 40px;
+      }
+      .hero h1 { font-size: 30px; }
+      .hero-visual { justify-content: flex-start; }
+      .hero-visual svg { max-width: 300px; }
+      .portal {
+        grid-template-columns: minmax(0, 1fr) 240px;
+        padding: 0 18px 32px;
+      }
+      .col-left {
+        display: none;
+      }
+      .header-inner { gap: 16px; }
+      .header-nav { display: none; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    @media (max-width: 740px) {
+      .announce-bar { font-size: 12px; padding: 6px 12px; line-height: 1.5; }
+      .header-inner { height: 60px; padding: 0 14px; gap: 10px; }
+      .brand-name { font-size: 16px; }
+      .brand-mark { width: 32px; height: 32px; font-size: 14px; }
+      .search-box { display: none; }
+      .btn-quick { padding: 7px 13px; font-size: 12px; }
+      .hero-inner { padding: 28px 16px 32px; }
+      .hero h1 { font-size: 25px; }
+      .hero-desc { font-size: 14px; }
+      .hero-actions { gap: 10px; }
+      .btn-primary, .btn-ghost { padding: 10px 20px; font-size: 13px; }
+      .hero-visual { display: none; }
+      .portal {
+        grid-template-columns: 1fr;
+        padding: 0 12px 24px;
+        gap: 0;
+      }
+      .col-right {
+        position: static;
+        margin-top: 0;
+      }
+      .col-right .side-card { margin-top: 18px; }
+      .section { padding: 18px 16px; margin-bottom: 16px; }
+      .section-title { font-size: 17px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .comment-list { grid-template-columns: 1fr; }
+      .news-thumb { width: 80px; height: 54px; }
+      .footer-top { grid-template-columns: 1fr; gap: 20px; }
+      .footer-inner { padding: 28px 16px 18px; }
+      .update-row { flex-wrap: wrap; gap: 6px; }
+      .update-row .u-time-right { margin-left: 76px; }
+      .guide-step { padding: 12px 13px; }
+      .deep-article h3 { font-size: 15px; }
+      .overview-text p, .deep-article p { font-size: 14px; }
+    }
+    @media (max-width: 360px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .brand-name { font-size: 15px; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- ===== 吸顶公告条 + 页头 ===== -->
+  <div class="sticky-wrap">
+    <div class="announce-bar">
+      <strong>今日 11 月 8 日</strong> 共 36 场对决开打 <span class="dot"></span> 新增 8 条战报 <span class="dot"></span> 王者荣耀秋季赛四强出炉
+    </div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="brand" aria-label="51每日大赛首页">
+          <span class="brand-mark" aria-hidden="true">51</span>
+          <span class="brand-name">51每日大赛</span>
+        </a>
+        <nav class="header-nav" aria-label="主题导航">
+          <a href="#latest" class="active">今日赛程</a>
+          <a href="#featured">热门对决</a>
+          <a href="#categories">分类入口</a>
+          <a href="#deep-dive">深度解析</a>
+          <a href="#guide">观赛指南</a>
+          <a href="#faq">常见问答</a>
+          <a href="#comments">玩家评论</a>
+          <a href="#news">赛事资讯</a>
+        </nav>
+        <div class="header-quick">
+          <div class="search-box">
+            <input type="search" id="searchInput" placeholder="搜索赛事 / 选手" aria-label="搜索赛事或选手">
+          </div>
+          <button class="btn-quick" type="button" id="searchBtn">搜索</button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- ===== 主题首屏 ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-tag"><span class="pulse"></span> 每日更新 · 36 场对决进行中</span>
+        <h1>51每日大赛</h1>
+        <p class="hero-desc">汇聚王者荣耀、英雄联盟、CS2、街霸6、和平精英等热门项目的每日赛程、对阵表、战报与选手数据。从下午的常规赛到深夜的决胜局，一页看全当天值得关注的比赛与关键对位。</p>
+        <div class="hero-actions">
+          <a href="#latest" class="btn-primary">查看今日赛程</a>
+          <a href="#featured" class="btn-ghost">热门对决推荐</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="280" rx="14" fill="#1e2433" stroke="#2f374a" stroke-width="1.5"/>
+          <rect x="28" y="30" width="150" height="12" rx="3" fill="#2f374a"/>
+          <rect x="28" y="50" width="90" height="8" rx="2" fill="#3a4256"/>
+          <circle cx="320" cy="42" r="14" fill="#f5b342" opacity="0.15"/>
+          <circle cx="320" cy="42" r="5" fill="#f5b342"/>
+          <line x1="28" y1="74" x2="352" y2="74" stroke="#2f374a" stroke-width="1"/>
+          <rect x="28" y="90" width="70" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="40" y="102" width="30" height="6" rx="2" fill="#f5b342" opacity="0.8"/>
+          <rect x="40" y="116" width="46" height="5" rx="2" fill="#4b5468"/>
+          <rect x="40" y="126" width="36" height="5" rx="2" fill="#3a4256"/>
+          <rect x="112" y="90" width="70" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="124" y="102" width="30" height="6" rx="2" fill="#2d6cdf" opacity="0.8"/>
+          <rect x="124" y="116" width="46" height="5" rx="2" fill="#4b5468"/>
+          <rect x="124" y="126" width="36" height="5" rx="2" fill="#3a4256"/>
+          <rect x="196" y="90" width="70" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="208" y="102" width="30" height="6" rx="2" fill="#2e9e5b" opacity="0.8"/>
+          <rect x="208" y="116" width="46" height="5" rx="2" fill="#4b5468"/>
+          <rect x="208" y="126" width="36" height="5" rx="2" fill="#3a4256"/>
+          <rect x="28" y="160" width="70" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="40" y="172" width="30" height="6" rx="2" fill="#e5484d" opacity="0.8"/>
+          <rect x="40" y="186" width="46" height="5" rx="2" fill="#4b5468"/>
+          <rect x="40" y="196" width="36" height="5" rx="2" fill="#3a4256"/>
+          <rect x="112" y="160" width="70" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="124" y="172" width="30" height="6" rx="2" fill="#f5b342" opacity="0.8"/>
+          <rect x="124" y="186" width="46" height="5" rx="2" fill="#4b5468"/>
+          <rect x="124" y="196" width="36" height="5" rx="2" fill="#3a4256"/>
+          <rect x="196" y="160" width="156" height="52" rx="6" fill="#252c3d" stroke="#333c51"/>
+          <rect x="210" y="172" width="40" height="6" rx="2" fill="#f5b342" opacity="0.9"/>
+          <circle cx="330" cy="182" r="10" fill="#f5b342" opacity="0.2"/>
+          <path d="M326 182l3 3 5-5" stroke="#f5b342" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="210" y="188" width="90" height="5" rx="2" fill="#4b5468"/>
+          <rect x="28" y="230" width="324" height="36" rx="8" fill="#252c3d" stroke="#333c51"/>
+          <circle cx="52" cy="248" r="8" fill="#f5b342" opacity="0.25"/>
+          <path d="M49 248l2 2 4-4" stroke="#f5b342" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="70" y="243" width="120" height="6" rx="2" fill="#4b5468"/>
+          <rect x="200" y="243" width="60" height="6" rx="2" fill="#3a4256"/>
+          <rect x="290" y="242" width="48" height="9" rx="4" fill="#f5b342" opacity="0.9"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 三栏门户主内容区 ===== -->
+  <div class="portal">
+
+    <!-- 左栏：频道索引 -->
+    <aside class="col-left" aria-label="频道索引">
+      <div class="side-card">
+        <div class="side-card-title">赛事频道</div>
+        <nav class="channel-list" aria-label="分类频道">
+          <a href="#latest" class="active"><span class="ch-dot"></span>今日赛程</a>
+          <a href="#featured"><span class="ch-dot"></span>热门对决</a>
+          <a href="#categories"><span class="ch-dot"></span>分类入口</a>
+          <a href="#deep-dive"><span class="ch-dot"></span>深度解析</a>
+          <a href="#guide"><span class="ch-dot"></span>观赛指南</a>
+          <a href="#faq"><span class="ch-dot"></span>常见问答</a>
+          <a href="#comments"><span class="ch-dot"></span>玩家评论</a>
+          <a href="#news"><span class="ch-dot"></span>赛事资讯</a>
+          <a href="#recommend"><span class="ch-dot"></span>延伸推荐</a>
+          <a href="#bonus"><span class="ch-dot"></span>榜单与时间线</a>
+        </nav>
+      </div>
+      <div class="side-card">
+        <div class="side-card-title">热门项目</div>
+        <nav class="channel-list" aria-label="热门项目">
+          <a href="#categories"><span class="ch-dot"></span>王者荣耀</a>
+          <a href="#categories"><span class="ch-dot"></span>英雄联盟</a>
+          <a href="#categories"><span class="ch-dot"></span>CS2</a>
+          <a href="#categories"><span class="ch-dot"></span>街霸6</a>
+          <a href="#categories"><span class="ch-dot"></span>和平精英</a>
+          <a href="#categories"><span class="ch-dot"></span>无畏契约</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- 中间主内容 -->
+    <main class="main-col">
+
+      <!-- 1. 主题领域概览 -->
+      <section class="section" id="overview">
+        <div class="section-head">
+          <h2 class="section-title">每日电竞赛事概览</h2>
+        </div>
+        <div class="overview-text">
+          <p><strong>51每日大赛</strong>所覆盖的领域，是围绕热门竞技项目每日展开的对战与赛程。当前主流项目大致分为三类：移动端 MOBA 以王者荣耀、和平精英为代表，赛程密集、对局时间短，适合利用碎片时间观看；PC 端 MOBA 与战术射击包括英雄联盟、CS2、无畏契约，单场时长较长、战术层次深，适合完整跟进系列赛；格斗项目如街霸6、拳皇15 则以个人对决为主，回合短、胜负悬念集中。</p>
+          <p>每天值得关注的比赛通常集中在几个时段：下午 14:00 开始的常规赛、晚间 19:00 至 22:00 的黄金档焦点战，以及深夜 23:00 之后的国际赛与跨时区对决。以 11 月 8 日为例，王者荣耀秋季赛四强战在 19:00 开打，英雄联盟全球总决赛小组赛第二阶段于 21:00 继续进行，CS2 亚洲邀请赛的败者组决赛则安排在 23:30。</p>
+          <p>判断一场比赛是否值得投入时间，可以看三个维度：双方近期交手记录、关键位置选手的状态、以及赛制带来的压力差异。BO3 与 BO5 的战术准备完全不同，淘汰赛与常规赛的心态也不同。赛事日历、对阵表和选手数据是每天赛前最常查看的三类信息，也是这个领域里最基础的内容框架。</p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section class="section" id="featured">
+        <div class="section-head">
+          <h2 class="section-title">今日精选对决</h2>
+          <a href="#latest" class="section-more">全部赛程 →</a>
+        </div>
+        <p class="section-sub">按开赛时间排序，涵盖今日焦点战与关键对位。</p>
+        <div class="card-grid" id="featuredGrid">
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/wzry-qiusai08/400/300" alt="王者荣耀秋季赛四强战比赛现场" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">王者荣耀</span>
+                <span class="tag tag-hot">焦点战</span>
+                <span class="tag tag-soft">BO7</span>
+              </div>
+              <h3 class="card-title">成都AG超玩会 vs 武汉eStarPro</h3>
+              <p class="card-desc">秋季赛四强战首场，双方本赛季常规赛交手 2 次打成 1:1。AG 在野区节奏上更强，eStar 则依赖中后期的团战决策，BO7 赛制下英雄池深度成为关键变量。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 9.8 万</span>
+                <span class="score">19:00 开赛</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/lol-s12group08/400/300" alt="英雄联盟全球总决赛小组赛现场" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">英雄联盟</span>
+                <span class="tag tag-blue">国际赛</span>
+                <span class="tag tag-soft">BO1</span>
+              </div>
+              <h3 class="card-title">JDG vs T1 小组赛二番战</h3>
+              <p class="card-desc">全球总决赛小组赛第二阶段，JDG 首轮曾负于 T1。本场关系到小组头名归属，JDG 需要在对线期限制 T1 下路发育，T1 则可能继续围绕上半区做文章。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 12.3 万</span>
+                <span class="score">21:00 开赛</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/cs2-asia08/400/300" alt="CS2亚洲邀请赛比赛画面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">CS2</span>
+                <span class="tag tag-green">淘汰赛</span>
+                <span class="tag tag-soft">BO3</span>
+              </div>
+              <h3 class="card-title">TYLOO vs The MongolZ 败者组决赛</h3>
+              <p class="card-desc">亚洲邀请赛败者组决赛，胜者晋级总决赛。TYLOO 在 Mirage 上胜率 68%，The MongolZ 的 Ancient 表现更稳，地图 BP 将直接决定比赛走向。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 6.7 万</span>
+                <span class="score">23:30 开赛</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/sf6-premier08/400/300" alt="街霸6 premier赛事对战画面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">街霸6</span>
+                <span class="tag tag-hot">八强</span>
+                <span class="tag tag-soft">BO5</span>
+              </div>
+              <h3 class="card-title">小孩 vs 猪皇 胜者组八强</h3>
+              <p class="card-desc">国内两位顶尖街霸6选手的胜者组对话。小孩的 JP 控场体系对上猪皇的嘉米压制打法，近三次交手猪皇 2 胜 1 负略占上风，但小孩在 BO5 赛制下调整能力更强。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 4.2 万</span>
+                <span class="score">16:00 开赛</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/hpjy-final08/400/300" alt="和平精英总决赛比赛现场" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">和平精英</span>
+                <span class="tag tag-blue">总决赛</span>
+                <span class="tag tag-soft">积分赛</span>
+              </div>
+              <h3 class="card-title">NV vs TEC 总决赛第三日</h3>
+              <p class="card-desc">总决赛进入第三日，NV 目前以 118 分领跑，TEC 落后 9 分排在第二。今日进行最后三局，海岛图与沙漠图各占一半，圈型刷新将直接影响两队进圈路线。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 5.5 万</span>
+                <span class="score">14:00 开赛</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <img class="card-img" src="https://picsum.photos/seed/val-champions08/400/300" alt="无畏契约冠军赛比赛画面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tag-row">
+                <span class="tag tag-type">无畏契约</span>
+                <span class="tag tag-green">小组赛</span>
+                <span class="tag tag-soft">BO3</span>
+              </div>
+              <h3 class="card-title">EDG vs DRX 小组赛收官</h3>
+              <p class="card-desc">无畏契约冠军赛小组赛最后一轮，EDG 需要拿下至少一张地图才能确保出线。DRX 的 Breeze 战术体系成熟，EDG 在 Lotus 上有过亮眼表现，地图选择是赛前最大看点。</p>
+              <div class="card-foot">
+                <span class="heat">🔥 热度 7.1 万</span>
+                <span class="score">20:00 开赛</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        <div class="no-result" id="noResult">没有找到匹配的赛事，换个关键词试试。</div>
+      </section>
+
+      <!-- 3. 最新更新 / 动态 -->
+      <section class="section" id="latest">
+        <div class="section-head">
+          <h2 class="section-title">最新赛程与战报</h2>
+          <span class="section-more">2026-11-08 更新</span>
+        </div>
+        <div class="update-list">
+          <div class="update-row">
+            <span class="u-badge live">进行中</span>
+            <div class="u-content">
+              <div class="u-title">街霸6 Premier 八强战：小孩 vs 猪皇</div>
+              <div class="u-summary">目前比分 2:1，小孩暂时领先，第四局正在进行。</div>
+            </div>
+            <span class="u-time-right">今天 16:42</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge new">新战报</span>
+            <div class="u-content">
+              <div class="u-title">和平精英总决赛第二日：NV 反超登顶</div>
+              <div class="u-summary">NV 在沙漠图连吃两鸡，总分 118 分反超 TEC 升至第一。</div>
+            </div>
+            <span class="u-time-right">今天 15:20</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge sched">赛程</span>
+            <div class="u-content">
+              <div class="u-title">王者荣耀秋季赛四强战今晚 19:00 开打</div>
+              <div class="u-summary">成都AG超玩会对阵武汉eStarPro，BO7 赛制，胜者进入总决赛。</div>
+            </div>
+            <span class="u-time-right">今天 14:05</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge new">新战报</span>
+            <div class="u-content">
+              <div class="u-title">CS2 亚洲邀请赛：TYLOO 2:0 晋级败者组决赛</div>
+              <div class="u-summary">TYLOO 在 Mirage 和 Inferno 上均以大比分取胜，今晚 23:30 对阵 The MongolZ。</div>
+            </div>
+            <span class="u-time-right">今天 12:48</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge done">已结束</span>
+            <div class="u-content">
+              <div class="u-title">英雄联盟全球总决赛：JDG 1:0 战胜 FNC</div>
+              <div class="u-summary">JDG 在 28 分钟拿下大龙后一波结束比赛，小组赛战绩来到 4 胜 1 负。</div>
+            </div>
+            <span class="u-time-right">今天 01:30</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge new">新战报</span>
+            <div class="u-content">
+              <div class="u-title">无畏契约冠军赛：EDG 2:1 险胜 FPX</div>
+              <div class="u-summary">决胜图 Lotus 上 EDG 完成 13:11 逆转，保留出线希望。</div>
+            </div>
+            <span class="u-time-right">昨天 22:15</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge sched">赛程</span>
+            <div class="u-content">
+              <div class="u-title">街霸6 Premier 八强对阵公布</div>
+              <div class="u-summary">小孩、猪皇、村肉、小宝分处不同半区，四强可能出现内战。</div>
+            </div>
+            <span class="u-time-right">昨天 18:20</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge done">已结束</span>
+            <div class="u-content">
+              <div class="u-title">王者荣耀秋季赛：eStarPro 4:2 淘汰狼队</div>
+              <div class="u-summary">eStar 在 1:2 落后的情况下连扳三局，晋级四强。</div>
+            </div>
+            <span class="u-time-right">11 月 6 日</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge sched">赛程</span>
+            <div class="u-content">
+              <div class="u-title">和平精英总决赛今日 14:00 进行最后三局</div>
+              <div class="u-summary">NV、TEC、LGD 三队分差在 15 分以内，冠军悬念保留到最后。</div>
+            </div>
+            <span class="u-time-right">11 月 7 日</span>
+          </div>
+          <div class="update-row">
+            <span class="u-badge done">已结束</span>
+            <div class="u-content">
+              <div class="u-title">CS2 亚洲邀请赛：The MongolZ 2:1 战胜 LVG</div>
+              <div class="u-summary">The MongolZ 在决胜图 Ancient 上 16:13 险胜，晋级败者组决赛。</div>
+            </div>
+            <span class="u-time-right">11 月 5 日</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section" id="categories">
+        <div class="section-head">
+          <h2 class="section-title">按项目与赛制分类</h2>
+        </div>
+        <div class="cat-grid">
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#f5b342;"></span>
+            <span class="cat-name">王者荣耀</span>
+            <span class="cat-count">今日 6 场 · 秋季赛</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#2d6cdf;"></span>
+            <span class="cat-name">英雄联盟</span>
+            <span class="cat-count">今日 4 场 · 全球总决赛</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#2e9e5b;"></span>
+            <span class="cat-name">CS2</span>
+            <span class="cat-count">今日 3 场 · 亚洲邀请赛</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#e5484d;"></span>
+            <span class="cat-name">街霸6</span>
+            <span class="cat-count">今日 8 场 · Premier</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#8b5cf6;"></span>
+            <span class="cat-name">和平精英</span>
+            <span class="cat-count">今日 3 局 · 总决赛</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#0ea5e9;"></span>
+            <span class="cat-name">无畏契约</span>
+            <span class="cat-count">今日 2 场 · 冠军赛</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#f97316;"></span>
+            <span class="cat-name">淘汰赛</span>
+            <span class="cat-count">BO3 / BO5 / BO7</span>
+          </a>
+          <a href="#latest" class="cat-item">
+            <span class="cat-dot" style="background:#64748b;"></span>
+            <span class="cat-name">小组赛</span>
+            <span class="cat-count">积分制 · 循环对阵</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section class="section" id="deep-dive">
+        <div class="section-head">
+          <h2 class="section-title">不同类型赛事的观看价值与判断维度</h2>
+        </div>
+        <div class="deep-article">
+          <p>每天面对几十场比赛，时间和注意力有限，需要一套稳定的判断方法来筛选。不同项目的赛制、节奏和信息密度差异很大，同一套标准并不通用。下面从赛制、对位和状态三个层面拆解。</p>
+
+          <h3>赛制决定了比赛的叙事结构</h3>
+          <p>BO1 与 BO3、BO5、BO7 是完全不同的观看体验。BO1 容错率低，队伍往往直接拿出最熟练的体系，冷门概率相对更高，适合想看单场爆点的观众。BO3 允许一次失误后的调整，教练组的 BP 应变开始显现。BO5 和 BO7 则是系列赛，英雄池、体力分配和心理博弈都会进入计算范围。</p>
+          <ul>
+            <li><strong>小组赛</strong>：赛程密集，单场权重低，适合挑焦点对阵看，不必场场跟进。</li>
+            <li><strong>淘汰赛</strong>：输一场即出局，选手操作与决策压力明显上升，关键局值得完整观看。</li>
+            <li><strong>积分赛</strong>：如和平精英总决赛，单局排名与淘汰分同样重要，需要看总积分走势而非单局胜负。</li>
+            <li><strong>双败赛制</strong>：败者组队伍连续作战，体能与地图池深度是隐性因素。</li>
+          </ul>
+
+          <h3>关键对位比整体强弱更有参考价值</h3>
+          <p>纸面实力接近的两支队伍，胜负往往取决于一两个位置的对位。王者荣耀看打野的节奏发起与辅助的游走时机；英雄联盟看中野联动和下路对线压制；CS2 看狙击手在关键回合的发挥与指挥的转点判断；街霸6 则看角色相性与选手的立回习惯。赛前查看对阵表时，先找到那个最可能被针对的位置，比泛泛比较两队胜率更有用。</p>
+
+          <h3>近期状态要看具体对手，而不只是连胜数字</h3>
+          <p>一支队伍的五连胜可能来自较弱对手，也可能是连续啃下硬仗。判断状态时，更值得看的是最近三场对手的平均强度、赢下的方式（是碾压还是翻盘）、以及输掉的小局里暴露了什么问题。例如 11 月 6 日 eStarPro 在 1:2 落后时连扳三局，这种逆风调整能力在 BO7 中往往比常规赛战绩更有说服力。</p>
+
+          <h3>不同项目的节奏差异</h3>
+          <p>移动端 MOBA 单局通常在 15 到 25 分钟，节奏快、团战频繁，适合碎片时间观看。PC 端 MOBA 单局 30 分钟以上，前期对线期较长，需要一定耐心。战术射击项目回合制结构明显，每个回合约 1 分 45 秒，适合按回合暂停回看。格斗项目单局最短，往往 3 到 5 分钟就能结束，但技术密度极高，一次确认连段就可能决定胜负。</p>
+          <p>了解这些差异之后，可以根据自己可支配的时间长度来选择：半小时以内看格斗或 MOBA 单局，一两个小时看 BO3 淘汰赛，整个晚上则适合跟完一场 BO5 或 BO7 系列赛。</p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 / 消费路径 -->
+      <section class="section" id="guide">
+        <div class="section-head">
+          <h2 class="section-title">观赛路径：从哪场开始看</h2>
+        </div>
+        <p class="section-sub">按照时间与关注度，给出一个可以照着执行的观看顺序。</p>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <span class="step-num">1</span>
+            <div class="step-body">
+              <div class="step-title">先确认当天必看场次</div>
+              <div class="step-text">打开赛程页，优先找淘汰赛、决赛、以及积分接近的收官战。以今日为例，王者荣耀秋季赛四强战和英雄联盟小组赛头名争夺属于必看级别。</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">2</span>
+            <div class="step-body">
+              <div class="step-title">按时间块安排观看</div>
+              <div class="step-text">下午 14:00 的和平精英总决赛适合边做别的事边看；19:00 的王者荣耀 BO7 需要整块时间；21:00 后的国际赛可以只看关键局。把不同时长的比赛放进对应的时间块。</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">3</span>
+            <div class="step-body">
+              <div class="step-title">用对阵表和选手数据做判断</div>
+              <div class="step-text">不确定某场值不值得看时，查双方最近三次交手、关键位置选手的近期数据。如果两队核心选手状态都在线，比赛质量通常不会差。</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">4</span>
+            <div class="step-body">
+              <div class="step-title">赛后看战报补关键局</div>
+              <div class="step-text">时间不够时，先看战报了解比分和转折点，再决定回看哪一局。很多系列赛的第三、第四局往往是战术调整最集中的部分。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section" id="faq">
+        <div class="section-head">
+          <h2 class="section-title">常见问答</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>每日电竞赛事一般几点开始，什么时候场次最密集？</summary>
+            <div class="faq-answer">国内赛事通常从下午 14:00 开始，晚间 19:00 至 22:00 是黄金档，焦点战多集中在这个时段。国际赛因为时差，常安排在深夜 23:00 之后。周末场次比工作日更密集，单日可达三十场以上。</div>
+          </details>
+          <details class="faq-item">
+            <summary>BO3 和 BO5 到底有什么区别，看哪种更值？</summary>
+            <div class="faq-answer">BO3 是三局两胜，BO5 是五局三胜。BO3 节奏更快，单场权重高，适合时间有限的观众；BO5 更考验英雄池和调整能力，关键局往往能看到更完整的战术博弈。淘汰赛后期和决赛通常采用 BO5 或 BO7。</div>
+          </details>
+          <details class="faq-item">
+            <summary>第一次看王者荣耀比赛，从哪场开始比较合适？</summary>
+            <div class="faq-answer">建议从有解说、有明确对阵表的四强或决赛阶段开始看，队伍实力清晰，赛制也更完整。今日 19:00 的成都AG超玩会对阵武汉eStarPro 是 BO7，适合完整体验一场系列赛的节奏。</div>
+          </details>
+          <details class="faq-item">
+            <summary>怎么判断一场比赛是不是焦点战？</summary>
+            <div class="faq-answer">看三个信号：双方近期交手是否互有胜负、是否关系晋级或排名、赛制是否为淘汰赛。满足其中两条基本就值得关注。焦点战通常在赛程表里也会被标为今日推荐。</div>
+          </details>
+          <details class="faq-item">
+            <summary>CS2 的 BO3 地图 BP 是怎么决定的？</summary>
+            <div class="faq-answer">双方轮流禁用和选择地图，先各禁一张，然后各选一张，再各禁一张，剩余地图为决胜图。地图池深度直接影响 BP 策略，擅长地图少的队伍在 BO3 中容易被针对。</div>
+          </details>
+          <details class="faq-item">
+            <summary>格斗游戏的 BO5 和 MOBA 的 BO5 看比赛感觉一样吗？</summary>
+            <div class="faq-answer">完全不一样。格斗游戏 BO5 是同一场比赛内打五局，单局通常三到五分钟，整场可能半小时内结束；MOBA 的 BO5 是五场独立对局，每场半小时左右，整场可能持续四五个小时。前者密度高，后者叙事长。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section" id="comments">
+        <div class="section-head">
+          <h2 class="section-title">玩家讨论</h2>
+          <span class="section-more">12 条精选评论</span>
+        </div>
+        <div class="comment-list">
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">夜</span>
+              <span class="c-name">夜雨声烦</span>
+              <span class="c-time">今天 16:48</span>
+            </div>
+            <p class="c-text"><span class="c-tag">街霸6</span>小孩这手 JP 打嘉米确实有准备，第三局那个确反太关键了，猪皇要调整一下立回节奏。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">电</span>
+              <span class="c-name">电竞老张</span>
+              <span class="c-time">今天 15:32</span>
+            </div>
+            <p class="c-text"><span class="c-tag">和平精英</span>NV 今天圈运确实好，但第二局那个绕后进圈也是真敢打，TEC 最后三局得换思路了。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">A</span>
+              <span class="c-name">AG铁粉小陈</span>
+              <span class="c-time">今天 14:20</span>
+            </div>
+            <p class="c-text">今晚 AG 打 eStar 我看好打满七局，两边英雄池都深，就看谁先拿到赛点不手软。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">T</span>
+              <span class="c-name">TYLOO冲</span>
+              <span class="c-time">今天 13:05</span>
+            </div>
+            <p class="c-text"><span class="c-tag">CS2</span>TYLOO 昨天那个 Mirage 打得真不错，今晚对 MongolZ 得把 Ancient  ban 掉，不然太难打。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">看</span>
+              <span class="c-name">看比赛不熬夜</span>
+              <span class="c-time">今天 12:10</span>
+            </div>
+            <p class="c-text">国际赛时间太阴间了，21 点那场还能看，23 点半的只能看战报了。希望多出点关键局回放。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">J</span>
+              <span class="c-name">JDG加油</span>
+              <span class="c-time">今天 10:44</span>
+            </div>
+            <p class="c-text"><span class="c-tag">英雄联盟</span>JDG 今晚打 T1 是关键，下路对线期得稳住，不能再像首轮那样被滚雪球了。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">无</span>
+              <span class="c-name">无畏小透明</span>
+              <span class="c-time">昨天 23:08</span>
+            </div>
+            <p class="c-text"><span class="c-tag">无畏契约</span>EDG 昨天 Lotus 那个 13:11 太刺激了，康康的残局处理真的稳，今晚打 DRX 有得一拼。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">格</span>
+              <span class="c-name">格斗萌新</span>
+              <span class="c-time">昨天 21:50</span>
+            </div>
+            <p class="c-text">刚入坑街霸6，想问下小孩和猪皇用的角色哪个更适合新手练？看他们打感觉操作好复杂。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">赛</span>
+              <span class="c-name">赛程控</span>
+              <span class="c-time">昨天 19:12</span>
+            </div>
+            <p class="c-text">今日赛程整理得挺清楚的，下午看和平精英，晚上看王者，深夜看 CS2，时间刚好错开。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">中</span>
+              <span class="c-name">中单老油条</span>
+              <span class="c-time">昨天 17:35</span>
+            </div>
+            <p class="c-text">eStar 打狼队那场让二追三真没想到，清融后面几局状态明显回来了，今晚对 AG 有得打。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">M</span>
+              <span class="c-name">MongolZ观察员</span>
+              <span class="c-time">11 月 7 日</span>
+            </div>
+            <p class="c-text">The MongolZ 的 Ancient 确实强，TYLOO 如果放出来会很危险。不过蒙古队最近状态也有起伏，不是没机会。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-head">
+              <span class="avatar">小</span>
+              <span class="c-name">小虎牙</span>
+              <span class="c-time">11 月 6 日</span>
+            </div>
+            <p class="c-text">和平精英总决赛积分制挺好看的，不像淘汰赛一场定生死，最后几局翻盘的空间大，悬念留得久。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section" id="news">
+        <div class="section-head">
+          <h2 class="section-title">赛事资讯</h2>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/wzry-autumn-schedule/600/400" alt="王者荣耀秋季赛赛程更新" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">王者荣耀秋季赛四强对阵确认，11 月 8 日至 10 日连打三场</h3>
+              <p class="news-summary">AG、eStar、狼队、WB 四支队伍会师四强，首场 AG 对 eStar 今晚 19:00 开打，采用 BO7 赛制。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/lol-group-stage/600/400" alt="英雄联盟全球总决赛小组赛第二阶段" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">英雄联盟全球总决赛小组赛第二阶段开打，JDG 今晚再战 T1</h3>
+              <p class="news-summary">小组赛进入第二阶段，各组出线形势逐渐明朗，JDG 与 T1 的头名之争成为今晚焦点。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/cs2-asia-finals/600/400" alt="CS2亚洲邀请赛败者组决赛" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">CS2 亚洲邀请赛败者组决赛今晚开打，TYLOO 对阵 The MongolZ</h3>
+              <p class="news-summary">胜者将晋级总决赛对阵 LVG，地图 BP 成为赛前讨论焦点，Ancient 的取舍可能决定走向。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/sf6-premier-bracket/600/400" alt="街霸6 Premier 八强对阵" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">街霸6 Premier 八强对阵出炉，小孩与猪皇同区</h3>
+              <p class="news-summary">两位国内顶尖选手被分在同一半区，八强提前相遇，胜者将在半决赛对阵村肉或小宝。</p>
+              <span class="news-date">2026-11-07</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/peace-final-day3/600/400" alt="和平精英总决赛第三日" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">和平精英总决赛进入最后一日，NV 领先 TEC 9 分</h3>
+              <p class="news-summary">今日进行最后三局，海岛图与沙漠图各占一半，NV 需要稳扎稳打，TEC 则必须争取高淘汰分。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/valorant-edg-drx/600/400" alt="无畏契约冠军赛EDG对阵DRX" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">无畏契约冠军赛小组赛收官，EDG 今晚对阵 DRX 争夺出线权</h3>
+              <p class="news-summary">EDG 目前战绩 2 胜 2 负，本场至少拿下一张地图才能确保晋级，DRX 则已提前出线可能轮换阵容。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section" id="recommend">
+        <div class="section-head">
+          <h2 class="section-title">延伸方向与专题</h2>
+        </div>
+        <p class="section-sub">从今日赛事延伸出去的类型、选手与赛制话题。</p>
+        <div class="rec-tags">
+          <a href="#deep-dive" class="rec-tag">BO7 系列赛战术调整</a>
+          <a href="#deep-dive" class="rec-tag">打野节奏对位分析</a>
+          <a href="#deep-dive" class="rec-tag">CS2 地图 BP 策略</a>
+          <a href="#deep-dive" class="rec-tag">街霸6 角色相性表</a>
+          <a href="#deep-dive" class="rec-tag">积分赛进圈路线选择</a>
+          <a href="#deep-dive" class="rec-tag">双败赛制体能分配</a>
+          <a href="#guide" class="rec-tag">新观众观赛时间规划</a>
+          <a href="#comments" class="rec-tag">选手近期状态讨论</a>
+        </div>
+      </section>
+
+      <!-- 11. 补充板块：热门榜单 + 时间线 -->
+      <section class="section" id="bonus">
+        <div class="section-head">
+          <h2 class="section-title">今日热度榜与关键时间线</h2>
+        </div>
+        <div class="bonus-grid">
+          <div>
+            <h3 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;">赛事热度榜</h3>
+            <table class="rank-table">
+              <thead>
+                <tr><th>排名</th><th>赛事</th><th>热度</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="rk">1</td><td class="rk-name">JDG vs T1 小组赛</td><td class="rk-val">12.3 万</td></tr>
+                <tr><td class="rk">2</td><td class="rk-name">AG vs eStar 四强战</td><td class="rk-val">9.8 万</td></tr>
+                <tr><td class="rk">3</td><td class="rk-name">EDG vs DRX 出线战</td><td class="rk-val">7.1 万</td></tr>
+                <tr><td class="rk">4</td><td class="rk-name">TYLOO vs MongolZ</td><td class="rk-val">6.7 万</td></tr>
+                <tr><td class="rk">5</td><td class="rk-name">NV vs TEC 总决赛</td><td class="rk-val">5.5 万</td></tr>
+                <tr><td class="rk">6</td><td class="rk-name">小孩 vs 猪皇 八强</td><td class="rk-val">4.2 万</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;">今日关键时间线</h3>
+            <div class="timeline">
+              <div class="tl-item hot">
+                <div class="tl-time">14:00</div>
+                <div class="tl-text"><strong>和平精英总决赛</strong> 最后三局开打</div>
+              </div>
+              <div class="tl-item hot">
+                <div class="tl-time">16:00</div>
+                <div class="tl-text"><strong>街霸6 Premier</strong> 八强：小孩 vs 猪皇</div>
+              </div>
+              <div class="tl-item hot">
+                <div class="tl-time">19:00</div>
+                <div class="tl-text"><strong>王者荣耀秋季赛</strong> 四强战：AG vs eStar</div>
+              </div>
+              <div class="tl-item hot">
+                <div class="tl-time">20:00</div>
+                <div class="tl-text"><strong>无畏契约冠军赛</strong> EDG vs DRX</div>
+              </div>
+              <div class="tl-item hot">
+                <div class="tl-time">21:00</div>
+                <div class="tl-text"><strong>英雄联盟全球总决赛</strong> JDG vs T1</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-time">23:30</div>
+                <div class="tl-text"><strong>CS2 亚洲邀请赛</strong> 败者组决赛</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右栏：热榜 + 更新流 -->
+    <aside class="col-right" aria-label="辅助信息">
+      <div class="side-card">
+        <div class="side-card-title">今日热门</div>
+        <div class="hot-list">
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">1</span>
+            <span class="hot-info">
+              <span class="hot-name">JDG vs T1</span>
+              <span class="hot-meta">英雄联盟 · 21:00 <span class="up">↑</span></span>
+            </span>
+          </a>
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">2</span>
+            <span class="hot-info">
+              <span class="hot-name">AG vs eStar</span>
+              <span class="hot-meta">王者荣耀 · 19:00</span>
+            </span>
+          </a>
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">3</span>
+            <span class="hot-info">
+              <span class="hot-name">EDG vs DRX</span>
+              <span class="hot-meta">无畏契约 · 20:00</span>
+            </span>
+          </a>
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">4</span>
+            <span class="hot-info">
+              <span class="hot-name">TYLOO vs MongolZ</span>
+              <span class="hot-meta">CS2 · 23:30</span>
+            </span>
+          </a>
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">5</span>
+            <span class="hot-info">
+              <span class="hot-name">小孩 vs 猪皇</span>
+              <span class="hot-meta">街霸6 · 16:00</span>
+            </span>
+          </a>
+          <a href="#featured" class="hot-item">
+            <span class="hot-rank">6</span>
+            <span class="hot-info">
+              <span class="hot-name">NV vs TEC</span>
+              <span class="hot-meta">和平精英 · 14:00</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="side-card-title">实时更新</div>
+        <div class="update-feed">
+          <div class="update-item">
+            <div class="u-time">16:42</div>
+            <div class="u-text"><strong>小孩</strong> 2:1 领先猪皇，第四局进行中</div>
+          </div>
+          <div class="update-item">
+            <div class="u-time">15:20</div>
+            <div class="u-text"><strong>NV</strong> 反超登顶，和平精英总决赛</div>
+          </div>
+          <div class="update-item">
+            <div class="u-time">14:05</div>
+            <div class="u-text"><strong>AG vs eStar</strong> 赛程确认，今晚 19:00</div>
+          </div>
+          <div class="update-item">
+            <div class="u-time">12:48</div>
+            <div class="u-text"><strong>TYLOO</strong> 2:0 晋级败者组决赛</div>
+          </div>
+          <div class="update-item">
+            <div class="u-time">01:30</div>
+            <div class="u-text"><strong>JDG</strong> 1:0 战胜 FNC，小组赛 4-1</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ===== 页尾 ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">
+            <span class="brand-mark" aria-hidden="true">51</span>
+            <span class="brand-name">51每日大赛</span>
+          </div>
+          <p class="footer-desc">每日追踪热门电竞赛程、对阵表与战报，覆盖王者荣耀、英雄联盟、CS2、街霸6、和平精英等项目。</p>
+        </div>
+        <div>
+          <div class="footer-col-title">赛事频道</div>
+          <div class="footer-links">
+            <a href="#latest">今日赛程</a>
+            <a href="#featured">热门对决</a>
+            <a href="#categories">分类入口</a>
+            <a href="#deep-dive">深度解析</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">内容栏目</div>
+          <div class="footer-links">
+            <a href="#guide">观赛指南</a>
+            <a href="#faq">常见问答</a>
+            <a href="#comments">玩家评论</a>
+            <a href="#news">赛事资讯</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">延伸方向</div>
+          <div class="footer-links">
+            <a href="#recommend">专题推荐</a>
+            <a href="#bonus">热度榜单</a>
+            <a href="#overview">领域概览</a>
+            <a href="#hero">返回顶部</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 51每日大赛 · 内容聚合示例站点</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== 内联脚本 ===== -->
+  <script>
+    (function () {
+      // 搜索筛选：对精选卡片进行本地过滤
+      var searchInput = document.getElementById('searchInput');
+      var searchBtn = document.getElementById('searchBtn');
+      var grid = document.getElementById('featuredGrid');
+      var noResult = document.getElementById('noResult');
+
+      function doSearch() {
+        if (!grid) return;
+        var q = (searchInput.value || '').trim().toLowerCase();
+        var cards = grid.querySelectorAll('.match-card');
+        var visibleCount = 0;
+        cards.forEach(function (card) {
+          var text = card.textContent.toLowerCase();
+          var show = q === '' || text.indexOf(q) !== -1;
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+        if (noResult) {
+          noResult.classList.toggle('show', visibleCount === 0);
+        }
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', doSearch);
+      }
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            doSearch();
+          }
+        });
+        searchInput.addEventListener('input', function () {
+          if (searchInput.value.trim() === '') {
+            doSearch();
+          }
+        });
+      }
+
+      // 频道导航高亮（基于滚动位置）
+      var channelLinks = document.querySelectorAll('.channel-list a[href^="#"]');
+      var sections = [];
+      channelLinks.forEach(function (link) {
+        var id = link.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+
+      function updateActive() {
+        var scrollPos = window.scrollY + 140;
+        var current = null;
+        sections.forEach(function (s) {
+          if (s.el.offsetTop <= scrollPos) {
+            current = s;
+          }
+        });
+        channelLinks.forEach(function (l) { l.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      if (sections.length) {
+        window.addEventListener('scroll', updateActive, { passive: true });
+        updateActive();
+      }
+    })();
+  </script>
+
+</body>
+  </html>
